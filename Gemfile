@@ -16,12 +16,17 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'capybara'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'launchy'
+  gem 'poltergeist'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -30,14 +35,6 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-end
-
-group :test do
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'launchy'
-  gem 'poltergeist'
-  gem 'selenium-webdriver'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
