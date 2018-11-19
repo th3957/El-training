@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ElTraining</title>
+    <title>El-Training</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <%= link_to "TOP", root_path %>
+    <%= link_to "NEW", new_task_path %>
+    <br>
     <%= yield %>
   </body>
 </html>
