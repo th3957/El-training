@@ -5,11 +5,13 @@
     <tr>
       <th><%= I18n.t('view.title') %></th>
       <th><%= I18n.t('view.deadline') %></th>
+      <th><%= I18n.t('view.created_at') %></th>
     </tr>
-    <% @tasks.each do |t| %>
+    <% @tasks.order("created_at").each do |t| %>
     <tr>
-      <td><%= link_to t.title, task_path(t) %></td>
+      <td class="task_title"><%= link_to t.title, task_path(t) %></td>
       <td><%= I18n.l(t.deadline, format: :custom_long) %></td>
+      <td><%= I18n.l(t.created_at, format: :custom_long) %></td>
     </tr>
     <% end %>
   </tbody>
