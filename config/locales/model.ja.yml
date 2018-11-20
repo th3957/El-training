@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: タイトル
+        contents: 内容
+        deadline: 終了期限

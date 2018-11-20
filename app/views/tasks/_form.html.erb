@@ -1,17 +1,26 @@
+<% if @task.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h3>
+      <%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:
+    </h3>
+    <ul>
+      <% @task.errors.full_messages.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with(model: task, local: true) do |f| %>
   <p>
   <%= f.label I18n.t('view.title') %><br><%= f.text_field :title %>
   </p>
-  <!--
-  <p><%= f.text_field :priority %></p>
-  <p><%= f.text_field :state %></p>
-  -->
   <p>
   <%= f.label I18n.t('view.deadline') %><br><%= f.datetime_select :deadline %>
   </p>
   <p>
   <%= f.label I18n.t('view.contents') %><br><%= f.text_area :contents %>
   </p>
-  <%= f.submit I18n.t('view.NEW') if action_name == 'new' %>
-  <%= f.submit I18n.t('view.EDIT') if action_name == 'edit' %>
+  <%= f.submit I18n.t('view.NEW') if action_name == 'new' || action_name == 'create' %>
+  <%= f.submit I18n.t('view.EDIT') if action_name == 'edit' || action_name == 'update' %>
 <% end %>

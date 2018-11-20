@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :task do
     title { 'テストケース１のタイトル' }
     contents { 'テストケース１のコンテンツ' }
-    deadline { DateTime.now }
+    deadline { DateTime.now.end_of_day }
   end
 
   factory :second_task, class: Task do
@@ -14,6 +14,6 @@ FactoryBot.define do
   factory :third_task, class: Task do
     title { 'テストケース３のタイトル' }
     contents { 'テストケース３のコンテンツ' }
-    deadline { DateTime.now }
+    deadline { DateTime.now.end_of_day }
   end
 end
