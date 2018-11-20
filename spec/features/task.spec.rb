@@ -45,13 +45,25 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(task_titles).to eq %w(テストケース１のタイトル テストケース２のタイトル テストケース３のタイトル)
   end
 
-  it "titleが空ならバリデーションが通らない" do
+  scenario "titleが空ならバリデーションが通らない" do
     task = Task.new(title: '', contents: '失敗テスト', deadline: DateTime.now.end_of_day)
     expect(task).not_to be_valid
   end
 
-  it "deadlineが過去ならバリデーションが通らない" do
+  scenario "deadlineが過去ならバリデーションが通らない" do
     task = Task.new(title: '失敗テスト', contents: '失敗テスト', deadline: DateTime.yesterday)
     expect(task).not_to be_valid
+  end
+
+  scenario "titleとcontentとdeadlineに内容が記載されていればバリデーションが通る" do
+    task = Task.new(title: '成功テスト', contents: '成功テスト', deadline: DateTime.now.end_of_day)
+    expect(task).to be_valid
+  end
+
+  scenario "終了期限でソートができているかのテスト" do
+    visit tasks_path
+    click_link '終了期限でソートする'
+    task_deadlines = all('.task_deadline').map(&:text)
+    expect(task_deadlines).to eq %W(#{'2019年10月10日(木) 12時00分'} #{'2019年11月11日(月) 07時00分'} #{'2050年11月11日(金) 09時00分'})
   end
 end
