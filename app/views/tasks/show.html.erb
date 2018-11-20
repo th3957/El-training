@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<h1><%= I18n.t('view.DETAIL') %></h1>
+<h2><%= @task.title %></h2>
+<p><%= @task.contents %></p>
+<p>
+  <%= I18n.t('view.deadline') %>：
+  <%= I18n.l(@task.deadline, format: :custom_long) %>
+</p>
+<p>
+  <%= I18n.t('view.created_at') %>：
+  <%= I18n.l(@task.created_at, format: :custom_long) %>
+</p>
+<p>
+  <%= I18n.t('view.updated_at') %>：
+  <%= I18n.l(@task.updated_at, format: :custom_long) %>
+</p>
+<hr>
+<p>
+  <%= link_to I18n.t('view.EDIT'), edit_task_path(@task) %>|
+  <%= link_to I18n.t('view.DELETE'), @task, method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
