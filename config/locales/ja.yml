@@ -218,3 +218,5 @@ ja:
     INDEX: 一覧
     DETAIL: 詳細
     DELETE: 削除
+    sort_by_deadline: 終了期限でソートする
+    sort_by_create_at: 作成日時でソートする

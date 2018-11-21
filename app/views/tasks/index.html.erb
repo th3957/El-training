@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 <h1><%= I18n.t('view.INDEX') %></h1>
+<p>
+<%= link_to I18n.t('view.sort_by_deadline'), tasks_path(sort_expired: "true") %>|
+<%= link_to I18n.t('view.sort_by_create_at'), tasks_path %>
+</p>
 <table>
   <tbody>
     <tr>
@@ -7,10 +11,10 @@
       <th><%= I18n.t('view.deadline') %></th>
       <th><%= I18n.t('view.created_at') %></th>
     </tr>
-    <% @tasks.order("created_at").each do |t| %>
+    <% @tasks.each do |t| %>
     <tr>
       <td class="task_title"><%= link_to t.title, task_path(t) %></td>
-      <td><%= I18n.l(t.deadline, format: :custom_long) %></td>
+      <td class="task_deadline"><%= I18n.l(t.deadline, format: :custom_long) %></td>
       <td><%= I18n.l(t.created_at, format: :custom_long) %></td>
     </tr>
     <% end %>
