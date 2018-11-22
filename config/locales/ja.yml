@@ -213,6 +213,14 @@ ja:
     deadline: 終了期限
     created_at: 作成日時
     updated_at: 更新日時
+    status: 進捗状況
+    before_start: 未着手
+    started: 着手中
+    finished: 完了
+    priority: 優先順位
+    priority_low: 低
+    priority_middle: 中
+    priority_high: 高
     NEW: 新規作成
     EDIT: 編集
     INDEX: 一覧
@@ -220,3 +228,4 @@ ja:
     DELETE: 削除
     sort_by_deadline: 終了期限でソートする
     sort_by_create_at: 作成日時でソートする
+    sort_by_status: 進捗状況でソートする
