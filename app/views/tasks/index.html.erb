@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 <h1><%= I18n.t('view.INDEX') %></h1>
 <p>
+<%= link_to I18n.t('view.sort_by_status'), tasks_path(sort_status: "true") %>|
+<%= link_to I18n.t('view.sort_by_priority'), tasks_path(sort_priority: "true") %>|
 <%= link_to I18n.t('view.sort_by_deadline'), tasks_path(sort_expired: "true") %>|
 <%= link_to I18n.t('view.sort_by_create_at'), tasks_path %>
 </p>
