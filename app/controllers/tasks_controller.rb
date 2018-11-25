@@ -2,14 +2,26 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :show, :update, :destroy]
 
   def index
-    if params[:sort_expired].present?
-      @tasks = Task.all.order("deadline")
-    elsif params[:sort_status].present?
-      @tasks = Task.all.order("status")
+    if params[:sort_status].present?
+      @tasks = Task.with_no_progress
     elsif params[:sort_priority].present?
-      @tasks = Task.all.order("priority DESC")
-    else
-      @tasks = Task.all.order("created_at DESC")
+      @tasks = Task.with_highest_priority
+    elsif params[:sort_expired].present?
+      @tasks = Task.closest_to_deadline
+    elsif params[:task].nil?
+      @tasks = Task.of_newest
+    elsif params[:task][:search].present? && params[:task][:status].present? && params[:task][:priority].present?
+      @tasks = Task.search_by_title(params[:task][:title])
+                   .search_by_status(params[:task][:status])
+                   .search_by_priority(params[:task][:priority])
+    elsif params[:task][:search].present? && params[:task][:status].present?
+      @tasks = Task.search_by_title(params[:task][:title])
+                   .search_by_status(params[:task][:status])
+    elsif params[:task][:search].present? && params[:task][:priority].present?
+      @tasks = Task.search_by_title(params[:task][:title])
+                   .search_by_priority(params[:task][:priority])
+    else params[:task][:search].present?
+      @tasks = Task.search_by_title(params[:task][:title])
     end
   end
 
@@ -56,7 +68,7 @@ class TasksController < ApplicationController
                                  :status,
                                  :priority,
                                  :deadline,
-                                 :contents,
-    )
+                                 :contents
+                                 )
   end
 end
