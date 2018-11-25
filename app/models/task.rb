@@ -14,4 +14,12 @@ class Task < ApplicationRecord
       errors.add(I18n.t('view.deadline'), ": Deadline can not be set in the past.")
     end
   end
+
+  scope :with_no_progress, -> { order(status: :asc) }
+  scope :with_highest_priority, -> { order(priority: :desc) }
+  scope :closest_to_deadline, -> { order(deadline: :asc) }
+  scope :of_newest, -> { order(created_at: :desc) }
+  scope :search_by_title, -> (t) { where("title LIKE ?", "%#{t}%") }
+  scope :search_by_status, -> (s) { where(status: s) }
+  scope :search_by_priority,-> (p) { where(priority: p) }
 end
