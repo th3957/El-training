@@ -19,7 +19,7 @@
     <tr>
       <td class="task_title"><%= link_to task.title, task_path(task) %></td>
       <td><%= task.status_i18n %></td>
-      <td><%= task.priority_i18n %></td>
+      <td class="task_priority"><%= task.priority_i18n %></td>
       <td class="task_deadline"><%= I18n.l(task.deadline, format: :custom_long) %></td>
       <td><%= I18n.l(task.created_at, format: :custom_long) %></td>
     </tr>
