@@ -14,11 +14,15 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 
 ## 開発環境
 - Windows 10
-- VirtualBox 5.2.22
-- Vagrant 2.2.0
 - Ubuntu 16.04.5
+- Vagrant 2.2.0
+- VirtualBox 5.2.22
 
 ## セットアップ
+
+0. このアプリケーションはPostgreSQLを使用しています。  
+実行環境にPostgreSQLがインストールされていない方は、[こちら](https://www.postgresql.org/download/)のページからお使いのOSにあわせて  
+最新版のダウンロードをおこない、インストールしてください。  
 
 1. GitHubからクローンをおこないます。
 
@@ -27,7 +31,7 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 ```
 
 2. rbenvがインストールされていない場合、以下のコマンドを実行してください。  
-（実行環境に既にrbenvがインストールされている方は、このステップは省略してください。）
+（既にrbenvがインストールされている方は、このステップは省略してください。）
 
 ```
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -46,9 +50,9 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 ```
 
 3. bundlerがインストールされていない場合、以下のコマンドを実行してください。  
-（既にインストールされている方は、このステップは省略してください。）
+（既にbundlerがインストールされている方は、このステップは省略してください。）
 
-```
+```ruby
     rbenv exec gem install bundler
 ```
 
@@ -73,35 +77,25 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 
 6. ブラウザで以下のURLを開くと、アプリケーションのページへアクセスできます。
 
-    <http://localhost:3000/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<http://localhost:3000/>
 
 ## テーブル設計
-| モデル名 | カラム名 | データ型 |
-|:-:|:-:|:-:|
-|User|name|string|
-||email|string|
-||password_digest|string|
-||created_at|string|
-||updated_at|string|
-|Task|title|string|
-||contents|text|
-||deadline|datetime|
-||status|integer|
-||status|index|
-||priority|integer|
-||priority|index|
-||created_at|datetime|
-||updated_at|datetime|
-||user_id|integer|
-||user_id(FK)|index|
-|Labeling|task_id|integer|
-||label_id|integer|
-||created_at|datetime|
-||updated_at|datetime|
-||task_id(FK)|index|
-||label_id(FK)|index|
-|Label|title|string|
-||Labelcolor|integer|
-||created_at|datetime|
-||updated_at|datetime|
-||user_id|integer|
+| モデル名 | カラム名 | &nbsp; データ型 &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| モデル名 | &nbsp; &nbsp; &nbsp; カラム名 &nbsp; &nbsp; &nbsp; | &nbsp; データ型 &nbsp; |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|User|name|string||Labeling|task_id|integer|
+|┣|email|string||┣|label_id|integer|
+|┣|password_digest|string||┣|created_at|datetime|
+|┣|created_at|string||┣|updated_at|datetime|
+|┗|updated_at|string||┣|task_id(FK)|index|
+|Task|title|string||┗|label_id(FK)|index|
+|┣|title|index||Label|title|string|
+|┣|contents|text||┣|Labelcolor|integer|
+|┣|deadline|datetime||┣|created_at|datetime|
+|┣|status|integer||┣|updated_at|datetime|
+|┣|status|index||┗|user_id|integer|
+|┣|priority|integer|||||
+|┣|priority|index|||||
+|┣|created_at|datetime|||||
+|┣|updated_at|datetime|||||
+|┣|user_id|integer|||||
+|┗|user_id(FK)|index|||||

@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_11_22_025658) do
     t.integer "priority", default: 0, null: false
     t.index ["priority"], name: "index_tasks_on_priority"
     t.index ["status"], name: "index_tasks_on_status"
+    t.index ["title"], name: "index_tasks_on_title"
   end
 
 end
