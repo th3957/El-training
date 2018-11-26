@@ -11,18 +11,22 @@ class TasksController < ApplicationController
     elsif params[:task].nil?
       @tasks = Task.of_newest
     elsif params[:task][:search].present? && params[:task][:status].present? && params[:task][:priority].present?
-      @tasks = Task.search_by_title(params[:task][:title])
-                   .search_by_status(params[:task][:status])
-                   .search_by_priority(params[:task][:priority])
-    elsif params[:task][:search].present? && params[:task][:status].present?
-      @tasks = Task.search_by_title(params[:task][:title])
-                   .search_by_status(params[:task][:status])
-    elsif params[:task][:search].present? && params[:task][:priority].present?
-      @tasks = Task.search_by_title(params[:task][:title])
-                   .search_by_priority(params[:task][:priority])
-    else params[:task][:search].present?
+      @tasks = Task.search_by_title_and_status_and_priority(
+        params[:task][:title], params[:task][:status], params[:task][:priority]
+        )
+    elsif params[:task][:status].present?
+      @tasks = Task.search_by_title_and_status(
+        params[:task][:title], params[:task][:status]
+        )
+    elsif params[:task][:priority].present?
+      @tasks = Task.search_by_title_and_priority(
+        params[:task][:title], params[:task][:priority]
+        )
+    else
       @tasks = Task.search_by_title(params[:task][:title])
     end
+
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   def create
