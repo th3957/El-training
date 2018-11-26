@@ -19,7 +19,16 @@ class Task < ApplicationRecord
   scope :with_highest_priority, -> { order(priority: :desc) }
   scope :closest_to_deadline, -> { order(deadline: :asc) }
   scope :of_newest, -> { order(created_at: :desc) }
-  scope :search_by_title, -> (t) { where("title LIKE ?", "%#{t}%") }
-  scope :search_by_status, -> (s) { where(status: s) }
-  scope :search_by_priority,-> (p) { where(priority: p) }
+  scope :search_by_title, -> (t) {
+    where("title LIKE ?", "%#{t}%")
+  }
+  scope :search_by_title_and_status, -> (t, s) {
+    where("title LIKE ?", "%#{t}%").where(status: s)
+  }
+  scope :search_by_title_and_priority, -> (t, p) {
+    where("title LIKE ?", "%#{t}%").where(priority: p)
+  }
+  scope :search_by_title_and_status_and_priority, -> (t, s, p) {
+    where("title LIKE ?", "%#{t}%").where(status: s).where(priority: p)
+  }
 end
