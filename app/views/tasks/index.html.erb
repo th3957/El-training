@@ -1,29 +1,7 @@
-<p id="notice"><%= notice %></p>
-<h1><%= I18n.t('view.INDEX') %></h1>
-<p>
-<%= link_to I18n.t('view.sort_by_status'), tasks_path(sort_status: "true") %>|
-<%= link_to I18n.t('view.sort_by_priority'), tasks_path(sort_priority: "true") %>|
-<%= link_to I18n.t('view.sort_by_deadline'), tasks_path(sort_expired: "true") %>|
-<%= link_to I18n.t('view.sort_by_create_at'), tasks_path %>
-</p>
-<table>
-  <tbody>
-    <tr>
-      <th><%= I18n.t('view.title') %></th>
-      <th><%= I18n.t('view.status') %></th>
-      <th><%= I18n.t('view.priority') %></th>
-      <th><%= I18n.t('view.deadline') %></th>
-      <th><%= I18n.t('view.created_at') %></th>
-    </tr>
-    <% @tasks.each do |task| %>
-    <tr>
-      <td class="task_title"><%= link_to task.title, task_path(task) %></td>
-      <td><%= task.status_i18n %></td>
-      <td class="task_priority"><%= task.priority_i18n %></td>
-      <td class="task_deadline"><%= I18n.l(task.deadline, format: :custom_long) %></td>
-      <td><%= I18n.l(task.created_at, format: :custom_long) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-<p><%= paginate @tasks %></p>
+<div class="row">
+  <div class="text-success col-md-12" id="notice"><%= notice %></div>
+</div>
+<div class="row">
+  <h1 class="col-md-12"><%= I18n.t('view.INDEX') %></h1>
+</div>
+<%= render 'list', task: @tasks %>

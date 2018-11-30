@@ -1,31 +1,87 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>El-Training</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= link_to "TOP", root_path %>
-    <%= form_with(model: Task.new, method: :get, url: tasks_path, local: true) do |f| %>
-      <%= f.text_field :title, placeholder: I18n.t('view.title') %>
-      <%= f.select :status,
-                    Task.statuses.map { |k, v| [I18n.t("view.#{k}"), v] },
-                    include_blank: I18n.t('view.status')
-                    %>
-      <%= f.select :priority,
-                    Task.priorities.map { |k, v| [I18n.t("view.#{k}"), v] },
-                    include_blank: I18n.t('view.priority')
-                    %>
-      <%= f.hidden_field :search, value: 'true' %>
-      <%= f.submit I18n.t('view.SEARCH') %>
-    <% end %>
-    <%= link_to "NEW", new_task_path %>
-    <br>
-    <%= yield %>
+    <div class="jumbotron jumbotron-fluid">
+      <nav class="navbar navbar-expand-md navbar-light">
+
+        <a class="navbar-brand" href="/">
+          <%= image_tag "top.png", :size => "25x25", :alt => "top page" %>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                <%= image_tag "person.png", :size => "25x25", :alt => "personal page" %>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="/tasks/new">
+                <%= image_tag "pen.png", :size => "25x25", :alt => "task new page" %>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                <%= image_tag "label.png", :size => "25x25", :alt => "label new page" %>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                <%= image_tag "login.png", :size => "25x25", :alt => "logout" %>
+              </a>
+            </li>
+          </ul>
+
+          <form class="form-inline">
+            <%= form_with(model: Task.new, method: :get, url: tasks_path, local: true) do |f| %>
+              <%= f.text_field :title,
+                  placeholder: I18n.t('view.title'),
+                  :class => "form-control"
+              %>
+              <%= f.select :status,
+                Task.statuses.map { |k, v| [I18n.t("view.#{k}"), v] },
+                include_blank: I18n.t('view.status'),
+                :class => "form-control"
+              %>
+              <%= f.select :priority,
+                Task.priorities.map { |k, v| [I18n.t("view.#{k}"), v] },
+                include_blank: I18n.t('view.priority')
+              %>
+              <%= f.hidden_field :search, value: 'true' %>
+              <div id="task_search">
+                <%= f.submit I18n.t('view.SEARCH'), :class => "form-control" %>
+              </div>
+            <% end %>
+          </form>
+        </div>
+      </nav>
+
+      <div class="container">
+        <%= yield %>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <span>https://github.com/th3957/El-training</span>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

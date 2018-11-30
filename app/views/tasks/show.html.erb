@@ -1,25 +1,66 @@
-<p id="notice"><%= notice %></p>
-<h1><%= I18n.t('view.DETAIL') %></h1>
-<h2><%= @task.title %></h2>
-<p>
-<%= @task.status_i18n %>
-<%= @task.priority_i18n %>
-</p>
-<p><%= @task.contents %></p>
-<p>
-  <%= I18n.t('view.deadline') %>：
-  <%= I18n.l(@task.deadline, format: :custom_long) %>
-</p>
-<p>
-  <%= I18n.t('view.created_at') %>：
-  <%= I18n.l(@task.created_at, format: :custom_long) %>
-</p>
-<p>
-  <%= I18n.t('view.updated_at') %>：
-  <%= I18n.l(@task.updated_at, format: :custom_long) %>
-</p>
-<hr>
-<p>
-  <%= link_to I18n.t('view.EDIT'), edit_task_path(@task) %>|
-  <%= link_to I18n.t('view.DELETE'), @task, method: :delete, data: { confirm: 'Are you sure?' } %>
-</p>
+<div class="row">
+  <div class="card col-xl-6">
+    <div class="row">
+      <div class="text-success col-xl-12" id="notice"><%= notice %></div>
+    </div>
+
+    <div class="row">
+      <h1 class="col-xl-12"><%= I18n.t('view.DETAIL') %></h1>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <h3 class="col-xl-12"><%= @task.title %></h3>
+    </div>
+
+    <div class="row">
+      <p class="col-xl-12">
+        <span class="badge badge-primary">
+          <%= link_to @task.status_i18n, edit_task_path(@task) %>
+        </span>
+        <span class="badge badge-primary">
+          <%= link_to @task.priority_i18n, edit_task_path(@task) %>
+        </span>
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12"><%= @task.contents %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <%= I18n.t('view.deadline') %>：
+        <%= I18n.l(@task.deadline, format: :custom_long) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <%= I18n.t('view.created_at') %>：
+        <%= I18n.l(@task.created_at, format: :custom_long) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <%= I18n.t('view.updated_at') %>：
+        <%= I18n.l(@task.updated_at, format: :custom_long) %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-xl-3 btn">
+        <%= link_to I18n.t('view.EDIT'), edit_task_path(@task), :class => "form-control" %>
+      </div>
+      <div class="col-xl-3 btn">
+        <%= link_to I18n.t('view.DELETE'), @task, method: :delete, data: { confirm: 'Are you sure?' }, :class => "form-control" %>
+      </div>
+    </div>
+  </div>
+</div>
