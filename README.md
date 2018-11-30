@@ -85,8 +85,8 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 |User|name|string||Labeling|task_id|integer|
 |┣|email|string||┣|label_id|integer|
 |┣|password_digest|string||┣|created_at|datetime|
-|┣|created_at|string||┣|updated_at|datetime|
-|┗|updated_at|string||┣|task_id(FK)|index|
+|┣|created_at|datetime||┣|updated_at|datetime|
+|┗|updated_at|datetime||┣|task_id(FK)|index|
 |Task|title|string||┗|label_id(FK)|index|
 |┣|title|index||Label|title|string|
 |┣|contents|text||┣|Labelcolor|integer|
