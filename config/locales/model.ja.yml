@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザー
     attributes:
       task:
         title: タイトル
@@ -9,6 +10,11 @@ ja:
         deadline: 終了期限
         status: 進捗状況
         priority: 優先順位
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワードの確認
   enums:
     task:
       status:
