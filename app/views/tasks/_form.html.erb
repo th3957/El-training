@@ -1,8 +1,6 @@
 <% if @task.errors.any? %>
   <div id="error_explanation" class="alert alert-danger">
-    <h3>
-      <%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:
-    </h3>
+    <h3><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h3>
     <ul>
       <% @task.errors.full_messages.each do |m| %>
         <li><%= m %></li>
@@ -12,15 +10,31 @@
 <% end %>
 
 <%= form_with(model: task, local: true) do |f| %>
+  <p><%= f.label I18n.t('view.title') %><br><%= f.text_field :title %></p>
+  <p><%= f.label I18n.t('view.contents') %><br><%= f.text_area :contents %></p>
   <p>
-  <%= f.label I18n.t('view.title') %><br><%= f.text_field :title %>
+    <%= f.label I18n.t('view.status') %>
+    <br>
+    <%= f.radio_button(:status, :before_start, checked: "checked") %>
+    <%= f.label(:status, I18n.t('view.before_start')) %>
+    <%= f.radio_button(:status, :started) %>
+    <%= f.label(:status, I18n.t('view.started')) %>
+    <%= f.radio_button(:status, :finished) %>
+    <%= f.label(:status, I18n.t('view.finished')) %>
   </p>
   <p>
-  <%= f.label I18n.t('view.deadline') %><br><%= f.datetime_select :deadline %>
+    <%= f.label I18n.t('view.priority') %>
+    <br>
+    <%= f.radio_button(:priority, :priority_low, checked: "checked") %>
+    <%= f.label(:priority, I18n.t('view.before_start')) %>
+    <%= f.radio_button(:priority, :priority_middle) %>
+    <%= f.label(:priority, I18n.t('view.priority_middle')) %>
+    <%= f.radio_button(:priority, :priority_high) %>
+    <%= f.label(:priority, I18n.t('view.priority_high')) %>
   </p>
+  <p><%= f.label I18n.t('view.deadline') %><br><%= f.datetime_select :deadline %></p>
   <p>
-  <%= f.label I18n.t('view.contents') %><br><%= f.text_area :contents %>
+    <%= f.submit I18n.t('view.NEW') if action_name == 'new' || action_name == 'create' %>
+    <%= f.submit I18n.t('view.EDIT') if action_name == 'edit' || action_name == 'update' %>
   </p>
-  <%= f.submit I18n.t('view.NEW') if action_name == 'new' || action_name == 'create' %>
-  <%= f.submit I18n.t('view.EDIT') if action_name == 'edit' || action_name == 'update' %>
 <% end %>

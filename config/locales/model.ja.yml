@@ -7,3 +7,15 @@ ja:
         title: タイトル
         contents: 内容
         deadline: 終了期限
+        status: 進捗状況
+        priority: 優先順位
+  enums:
+    task:
+      status:
+        before_start: 未着手
+        started: 着手中
+        finished: 完了
+      priority:
+        priority_low: 低
+        priority_middle: 中
+        priority_high: 高

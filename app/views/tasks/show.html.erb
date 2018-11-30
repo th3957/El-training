@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 <h1><%= I18n.t('view.DETAIL') %></h1>
 <h2><%= @task.title %></h2>
+<p>
+<%= @task.status_i18n %>
+<%= @task.priority_i18n %>
+</p>
 <p><%= @task.contents %></p>
 <p>
   <%= I18n.t('view.deadline') %>：

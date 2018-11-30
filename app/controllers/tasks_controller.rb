@@ -2,11 +2,31 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :show, :update, :destroy]
 
   def index
-    if params[:sort_expired].present?
-      @tasks = Task.all.order("deadline")
+    if params[:sort_status].present?
+      @tasks = Task.with_no_progress
+    elsif params[:sort_priority].present?
+      @tasks = Task.with_highest_priority
+    elsif params[:sort_expired].present?
+      @tasks = Task.closest_to_deadline
+    elsif params[:task].nil?
+      @tasks = Task.of_newest
+    elsif params[:task][:search].present? && params[:task][:status].present? && params[:task][:priority].present?
+      @tasks = Task.search_by_title_and_status_and_priority(
+        params[:task][:title], params[:task][:status], params[:task][:priority]
+        )
+    elsif params[:task][:status].present?
+      @tasks = Task.search_by_title_and_status(
+        params[:task][:title], params[:task][:status]
+        )
+    elsif params[:task][:priority].present?
+      @tasks = Task.search_by_title_and_priority(
+        params[:task][:title], params[:task][:priority]
+        )
     else
-      @tasks = Task.all.order("created_at")
+      @tasks = Task.search_by_title(params[:task][:title])
     end
+
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   def create
@@ -49,10 +69,10 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title,
+                                 :status,
                                  :priority,
-                                 :state,
                                  :deadline,
-                                 :contents,
-    )
+                                 :contents
+                                 )
   end
 end

@@ -11,6 +11,19 @@
 
   <body>
     <%= link_to "TOP", root_path %>
+    <%= form_with(model: Task.new, method: :get, url: tasks_path, local: true) do |f| %>
+      <%= f.text_field :title, placeholder: I18n.t('view.title') %>
+      <%= f.select :status,
+                    Task.statuses.map { |k, v| [I18n.t("view.#{k}"), v] },
+                    include_blank: I18n.t('view.status')
+                    %>
+      <%= f.select :priority,
+                    Task.priorities.map { |k, v| [I18n.t("view.#{k}"), v] },
+                    include_blank: I18n.t('view.priority')
+                    %>
+      <%= f.hidden_field :search, value: 'true' %>
+      <%= f.submit I18n.t('view.SEARCH') %>
+    <% end %>
     <%= link_to "NEW", new_task_path %>
     <br>
     <%= yield %>
