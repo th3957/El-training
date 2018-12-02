@@ -10,14 +10,14 @@
 }
 
 //上部ナビ
-.navbar-brand {
-  padding: 8px 8px 10px 8px;
-  margin: 0;
+li.nav-item.active {
+  padding-left: 16px;
 }
 
-li.nav-item.active {
-  padding-left: 8px;
-}
+// .navbar-brand {
+//   padding: 8px 8px 10px 8px;
+//   margin: 0;
+// }
 
 select#task_status,
 select#task_priority {
@@ -74,7 +74,7 @@ span.badge.badge-primary:hover {
   }
 }
 
-//一覧と詳細の通知部分
+//通知
 #notice {
   font-weight: bold;
   margin-bottom: 15px;
@@ -143,9 +143,10 @@ select#task_deadline_5i {
   border: 1px solid #ced4da;
 }
 
-//詳細のボタン２つ
-.btn {
+//詳細のリンク２つ
+.link_to_btn {
   text-align: center;
+  margin-bottom: 16px;
   a {
     text-decoration: none;
     color: black;

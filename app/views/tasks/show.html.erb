@@ -55,10 +55,11 @@
     <hr>
 
     <div class="row">
-      <div class="col-xl-3 btn">
+      <div class="link_to_btn col-xl-3">
         <%= link_to I18n.t('view.EDIT'), edit_task_path(@task), :class => "form-control" %>
       </div>
-      <div class="col-xl-3 btn">
+      <br>
+      <div class="link_to_btn col-xl-3">
         <%= link_to I18n.t('view.DELETE'), @task, method: :delete, data: { confirm: 'Are you sure?' }, :class => "form-control" %>
       </div>
     </div>
