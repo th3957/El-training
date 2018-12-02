@@ -98,5 +98,5 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 |┣|priority|index|||||
 |┣|created_at|datetime|||||
 |┣|updated_at|datetime|||||
-|┣|user_id|integer|||||
+|┣|user_id|bigint|||||
 |┗|user_id(FK)|index|||||
