@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :show, :update, :destroy]
+  before_action :user_confirmation
 
   def index
     if params[:sort_status].present?
@@ -64,7 +65,15 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    if Task.find_by_id(params[:id]).nil?
+      redirect_to root_path
+    else
+      @task = Task.find(params[:id])
+    end
+  end
+
+  def user_confirmation
+    redirect_to root_path unless logged_in?
   end
 
   def task_params
