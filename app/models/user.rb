@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :tasks
+
   validates :name, presence: true, length: { in: 1..20 }
   validates :email, presence: true, length: { in: 1..20 },
             format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
