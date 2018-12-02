@@ -52,6 +52,13 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-xl-12">
+        <%= I18n.t('view.posted_by') %>：
+        <%= User.find(@task.user_id).name %>
+      </div>
+    </div>
+
     <hr>
 
     <div class="row">
