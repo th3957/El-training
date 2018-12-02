@@ -275,6 +275,8 @@ ja:
     SEARCH: 検索
     NEWUSER: ユーザー新規作成
     PROFILE: ユーザー詳細
+    LOGIN: ログイン
+    LOGOUT: ログアウト
     sort_by_deadline: 終了期限でソートする
     sort_by_create_at: 作成日時でソートする
     sort_by_status: 進捗状況でソートする
