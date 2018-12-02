@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
       redirect_to root_path unless @user.id == current_user.id
+    end
   end
 
   private
