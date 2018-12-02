@@ -27,7 +27,7 @@ class TasksController < ApplicationController
       @tasks = Task.search_by_title(params[:task][:title])
     end
 
-    @tasks = @tasks.page(params[:page]).per(10)
+    @tasks = @tasks.where(user_id: current_user.id).page(params[:page]).per(10)
   end
 
   def create
