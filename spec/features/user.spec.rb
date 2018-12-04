@@ -5,15 +5,6 @@ RSpec.feature "ユーザー機能", type: :feature do
     FactoryBot.create(:user)
   end
 
-  scenario "ユーザー詳細のテスト" do
-    visit root_path
-    fill_in 'session_email', with: '111@gmail.com'
-    fill_in 'session_password', with: 'qazwsx'
-    click_button 'ログイン'
-    expect(page).to have_content 'テストユーザー１のネーム'
-    expect(page).not_to have_content 'テストユーザー２のネーム'
-  end
-
   scenario "ユーザー作成のテスト" do
     visit new_user_path
     fill_in 'user_name', with: 'これは名前です。'
@@ -54,38 +45,40 @@ RSpec.feature "ユーザー機能", type: :feature do
     expect(page).not_to have_content 'テストユーザー１のネーム'
   end
 
-  scenario "ログアウトのテスト" do
-    visit root_path
-    fill_in 'session_email', with: '111@gmail.com'
-    fill_in 'session_password', with: 'qazwsx'
-    click_button 'ログイン'
-    click_link 'logout'
-    expect(page).to have_content 'Logout completed successfully.'
-  end
-
   scenario "ログインしないでタスク一覧へ行こうとするとログインページに飛ぶ" do
     visit tasks_path
     expect(page).to have_content 'ログイン'
     expect(page).not_to have_content '一覧'
   end
 
-  scenario "ログイン中にユーザー新規作成に行こうとすると詳細ページに飛ぶ" do
-    visit root_path
-    fill_in 'session_email', with: '111@gmail.com'
-    fill_in 'session_password', with: 'qazwsx'
-    click_button 'ログイン'
-    visit new_user_path
-    expect(page).to have_content 'ユーザー詳細'
-    expect(page).not_to have_content 'ユーザー新規作成'
-  end
+  feature "テストユーザー１でログイン", type: :feature do
+    background do
+      visit root_path
+      fill_in 'session_email', with: '111@gmail.com'
+      fill_in 'session_password', with: 'qazwsx'
+      click_button 'ログイン'
+    end
 
-  scenario "ログイン中に他ユーザーの詳細ページに行こうとするとログインページに飛ぶ" do
-    visit root_path
-    fill_in 'session_email', with: '111@gmail.com'
-    fill_in 'session_password', with: 'qazwsx'
-    click_button 'ログイン'
-    visit 'http://localhost:3000/users/10000'
-    expect(page).to have_content 'ログイン'
-    expect(page).not_to have_content 'ユーザー詳細'
+    scenario "ユーザー詳細のテスト" do
+      expect(page).to have_content 'テストユーザー１のネーム'
+      expect(page).not_to have_content 'テストユーザー２のネーム'
+    end
+
+    scenario "ログアウトのテスト" do
+      click_link 'logout'
+      expect(page).to have_content 'Logout completed successfully.'
+    end
+
+    scenario "ログイン中にユーザー新規作成に行こうとすると詳細ページに飛ぶ" do
+      visit new_user_path
+      expect(page).to have_content 'ユーザー詳細'
+      expect(page).not_to have_content 'ユーザー新規作成'
+    end
+
+    scenario "ログイン中に他ユーザーの詳細ページに行こうとするとログインページに飛ぶ" do
+      visit 'http://localhost:3000/users/10000'
+      expect(page).to have_content 'ログイン'
+      expect(page).not_to have_content 'ユーザー詳細'
+    end
   end
 end
