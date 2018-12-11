@@ -41,7 +41,7 @@ RSpec.feature "タスク管理機能", type: :feature do
 
     scenario "タスク作成のテスト" do
       visit new_task_path
-      all('#task_title')[1].set('これはタイトルです。')
+      fill_in 'task_title', with: 'これはタイトルです。'
       fill_in 'task_contents', with: 'これは内容です。'
       choose 'task_status_finished'
       choose 'task_priority_priority_low'
@@ -71,7 +71,7 @@ RSpec.feature "タスク管理機能", type: :feature do
       visit tasks_path
       click_link 'テストケース２のタイトル'
       click_link '編集'
-      all('#task_title')[1].set('編集されたテストケース２のタイトル')
+      fill_in 'task_title', with: '編集されたテストケース２のタイトル'
       fill_in 'task_contents', with: 'テストケース２のコンテンツ内容を編集しました。'
       choose 'task_status_started'
       choose 'task_priority_priority_low'

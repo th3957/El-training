@@ -1,7 +1,66 @@
 <div class="row" id="notice">
   <div class="text-success col-md-12"><%= notice %></div>
 </div>
+
 <div class="row">
-  <h1 class="col-md-12"><%= I18n.t('view.INDEX') %></h1>
+  <h1 class="col-md-12 mb-3">
+    <%= I18n.t('view.INDEX') %>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"     aria-haspopup="true" aria-expanded="false">
+      sort
+      </button>
+      <div class="sort dropdown-menu">
+        <div class="dropdown-item" href="#">
+          <%= link_to I18n.t('view.sort_by_status'), tasks_path(sort_status: "true") %>
+        </div>
+        <div class="dropdown-item" href="#">
+          <%= link_to I18n.t('view.sort_by_priority'), tasks_path(sort_priority: "true") %>
+        </div>
+        <div class="dropdown-item" href="#">
+          <%= link_to I18n.t('view.sort_by_deadline'), tasks_path(sort_expired: "true") %>
+        </div>
+        <div class="dropdown-item" href="#">
+          <%= link_to I18n.t('view.sort_by_create_at'), tasks_path %>
+        </div>
+      </div>
+    </div>
+  </h1>
 </div>
+
+
+<%= form_with(model: Task.new, method: :get, url: tasks_path, local: true) do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.text_field :title,
+            placeholder: I18n.t('view.title'),
+            :class => "form-control"
+        %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.select :status,
+          Task.statuses.map { |k, v| [I18n.t("view.#{k}"), v] },
+          include_blank: I18n.t('view.status')
+        %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.select :priority,
+          Task.priorities.map { |k, v| [I18n.t("view.#{k}"), v] },
+          include_blank: I18n.t('view.priority')
+        %>
+      </div>
+    </div>
+    <%= f.hidden_field :search, value: 'true' %>
+    <div class="col-md-2">
+      <div class="form-group" id="task_search">
+        <%= f.submit I18n.t('view.SEARCH'), :class => "form-control" %>
+      </div>
+    </div>
+  </div>
+<% end %>
 <%= render 'list', task: @tasks %>

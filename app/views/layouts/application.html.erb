@@ -46,27 +46,6 @@
                 </div>
               </li>
             </ul>
-            <form class="form-inline">
-              <%= form_with(model: Task.new, method: :get, url: tasks_path, local: true) do |f| %>
-                <%= f.text_field :title,
-                    placeholder: I18n.t('view.title'),
-                    :class => "form-control"
-                %>
-                <%= f.select :status,
-                  Task.statuses.map { |k, v| [I18n.t("view.#{k}"), v] },
-                  include_blank: I18n.t('view.status'),
-                  :class => "form-control"
-                %>
-                <%= f.select :priority,
-                  Task.priorities.map { |k, v| [I18n.t("view.#{k}"), v] },
-                  include_blank: I18n.t('view.priority')
-                %>
-                <%= f.hidden_field :search, value: 'true' %>
-                <div id="task_search">
-                  <%= f.submit I18n.t('view.SEARCH'), :class => "form-control" %>
-                </div>
-              <% end %>
-            </form>
             <% else %>
             <ul class="navbar-nav">
               <li class="nav-item active">
