@@ -9,7 +9,7 @@
                )
 end
 
-2.times do |n|
+30.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.unique.email
   password = Faker::Internet.password(6)
@@ -20,7 +20,7 @@ end
                )
 end
 
-100.times do |n|
+1000.times do |n|
   title = Faker::Company.name
   contents = Faker::Lorem.paragraph(sentence_count = 10)
   status = [0, 1, 2].sample
