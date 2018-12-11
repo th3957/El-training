@@ -275,10 +275,15 @@ ja:
     DELETE: 削除
     SEARCH: 検索
     NEWUSER: ユーザー新規作成
+    USERINDEX: ユーザー一覧
     PROFILE: ユーザー詳細
+    USERDELETE: ユーザー削除
+    USEREDIT: ユーザー編集
     LOGIN: ログイン
     LOGOUT: ログアウト
     sort_by_deadline: 終了期限でソートする
     sort_by_create_at: 作成日時でソートする
     sort_by_status: 進捗状況でソートする
     sort_by_priority: 優先順位でソートする
+    number_of_tasks: 保有タスク数
+    add_to_name: さんのページ
