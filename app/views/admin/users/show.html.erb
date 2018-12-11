@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="card col-xl-6">
+    <div class="row">
+      <div class="text-success col-xl-12" id="notice"><%= notice %></div>
+    </div>
+
+    <div class="row">
+      <h1 class="col-xl-12"><%= I18n.t('view.PROFILE') %></h1>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <h3 class="col-xl-12 mb-3"><%= @user.name %><%= I18n.t('view.add_to_name') %></h3>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <table class="table text-nowrap">
+          <% @own_tasks.each do |t| %>
+            <tr>
+              <td><%= t.title %></td>
+              <td><%= t.status_i18n %></td>
+              <td><%= t.priority_i18n %></td>
+            </tr>
+          <% end %>
+        </table>
+        <%= paginate @own_tasks %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="link_to_btn col-xl-4">
+        <%= link_to I18n.t('view.USERINDEX'), admin_users_path, :class => "form-control" %>
+      </div>
+    </div>
+  </div>
+</div>
