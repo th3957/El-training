@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-xl-12">
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h3>
+          <%= pluralize(@user.errors.count, "error") %> prohibited this task from being saved:
+        </h3>
+        <ul>
+          <% @user.errors.full_messages.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= form_with(model: [ :admin, @user ], local: true) do |f| %>
+  <div class="row">
+    <div class="col-xl-12">
+      <%= f.label I18n.t('view.name') %>
+      <br>
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <%= f.label I18n.t('view.email') %>
+      <br>
+      <%= f.text_field :email, :class => "form-control" %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <%= f.label I18n.t('view.password') %>
+      <br>
+      <%= f.password_field :password, :class => "form-control" %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <%= f.label I18n.t('view.password_confirmation') %>
+      <br>
+      <%= f.password_field :password_confirmation, :class => "form-control" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="link_to_btn col-xl-3">
+      <%= f.submit I18n.t('view.NEW'), :class => "form-control" if action_name == 'new' || action_name == 'create' %>
+      <%= f.submit I18n.t('view.EDIT'), :class => "form-control" if action_name == 'edit' || action_name == 'update' %>
+    </div>
+    <br>
+    <div class="link_to_btn col-xl-4">
+      <%= link_to I18n.t('view.USERINDEX'), admin_users_path, :class => "form-control" %>
+    </div>
+  </div>
+<% end %>
