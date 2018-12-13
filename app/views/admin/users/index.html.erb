@@ -1,0 +1,47 @@
+<div class="row" id="notice">
+  <div class="text-success col-md-12"><%= notice %></div>
+</div>
+<div class="row">
+  <h1 class="col-md-12"><%= I18n.t('view.INDEX') %></h1>
+</div>
+
+<div class="row">
+  <p class="col-md-12">
+    <span class="badge badge-primary">
+      <%= link_to I18n.t('view.NEWUSER'), new_admin_user_path %>
+    </span>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-12 table-responsive">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= I18n.t('view.name') %></th>
+          <th><%= I18n.t('view.email') %></th>
+          <th><%= I18n.t('view.number_of_tasks') %></th>
+          <th><%= I18n.t('view.created_at') %></th>
+          <th><%= I18n.t('view.USEREDIT') %></th>
+          <th><%= I18n.t('view.USERDELETE') %></th>
+        </tr>
+        <% @users.each do |u| %>
+        <tr>
+          <td><%= link_to u.name, admin_user_path(u) %></td>
+          <td><%= u.email %></td>
+          <td><%= u.tasks.count %></td>
+          <td><%= I18n.l(u.created_at, format: :custom_long) %></td>
+          <td class="user_edit"><%= link_to I18n.t('view.EDIT'), edit_admin_user_path(u) %></td>
+          <td class="user_delete"><%= link_to I18n.t('view.DELETE'), admin_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= paginate @users %>
+  </div>
+</div>

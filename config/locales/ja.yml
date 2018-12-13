@@ -255,6 +255,11 @@ ja:
     deadline: 終了期限
     created_at: 作成日時
     updated_at: 更新日時
+    posted_by: 作成者
+    name: 名前
+    email: メールアドレス
+    password: パスワード
+    password_confirmation: パスワードの確認
     status: 進捗状況
     before_start: 未着手
     started: 着手中
@@ -269,7 +274,16 @@ ja:
     DETAIL: 詳細
     DELETE: 削除
     SEARCH: 検索
+    NEWUSER: ユーザー新規作成
+    USERINDEX: ユーザー一覧
+    PROFILE: ユーザー詳細
+    USERDELETE: ユーザー削除
+    USEREDIT: ユーザー編集
+    LOGIN: ログイン
+    LOGOUT: ログアウト
     sort_by_deadline: 終了期限でソートする
     sort_by_create_at: 作成日時でソートする
     sort_by_status: 進捗状況でソートする
     sort_by_priority: 優先順位でソートする
+    number_of_tasks: 保有タスク数
+    add_to_name: さんのページ

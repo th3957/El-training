@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :show, :update, :destroy]
+  before_action :user_confirmation
 
   def index
     if params[:sort_status].present?
@@ -26,11 +27,11 @@ class TasksController < ApplicationController
       @tasks = Task.search_by_title(params[:task][:title])
     end
 
-    @tasks = @tasks.page(params[:page]).per(10)
+    @tasks = @tasks.where(user_id: current_user.id).page(params[:page]).per(10)
   end
 
   def create
-    @task = Task.create(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to task_path(@task), notice: 'Task was successfully created.'
     else
@@ -64,7 +65,15 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    if Task.find_by_id(params[:id]).nil?
+      redirect_to root_path
+    else
+      @task = Task.find(params[:id])
+    end
+  end
+
+  def user_confirmation
+    redirect_to root_path unless logged_in?
   end
 
   def task_params

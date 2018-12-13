@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12 table-responsive">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= I18n.t('view.title') %></th>
+          <th><%= I18n.t('view.status') %></th>
+          <th><%= I18n.t('view.priority') %></th>
+          <th><%= I18n.t('view.deadline') %></th>
+          <th><%= I18n.t('view.created_at') %></th>
+        </tr>
+        <% @tasks.each do |t| %>
+        <tr>
+          <td class="task_title"><%= link_to t.title, task_path(t) %></td>
+          <td><%= t.status_i18n %></td>
+          <td class="task_priority"><%= t.priority_i18n %></td>
+          <td class="task_deadline"><%= I18n.l(t.deadline, format: :custom_long) %></td>
+          <td><%= I18n.l(t.created_at, format: :custom_long) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= paginate @tasks %>
+  </div>
+</div>

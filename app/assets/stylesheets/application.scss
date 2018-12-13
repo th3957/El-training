@@ -1,0 +1,171 @@
+@import "bootstrap";
+
+//背景
+.jumbotron {
+  background: url(background.png);
+  background-size: cover;
+  background-position: center 60%;
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+//上部ナビ
+li.nav-item.active {
+  padding-left: 16px;
+}
+
+// .navbar-brand {
+//   padding: 8px 8px 10px 8px;
+//   margin: 0;
+// }
+
+//一覧のソートリスト、検索フォーム
+.btn.btn-light.dropdown-toggle {
+  margin-left: 6px;
+  margin-bottom: 8px;
+}
+
+.sort.dropdown-menu {
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+select#task_status,
+select#task_priority {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  height: calc(2.25rem + 2px);
+  line-height: 1.5;
+}
+
+input#task_title,
+#task_search.form-group {
+  width: 100%;
+}
+
+//一覧のテーブル
+.table.table-hover.text-nowrap tbody {
+  width: 100%;
+  tr {
+    th {
+      border-top-color: #FFE6B4;
+    }
+    td {
+      border-top-color: #FFE6B4;
+      a {
+        color: black;
+        text-decoration: none;
+      }
+    }
+  }
+  tr:hover {
+    td {
+      a {
+        border-bottom: dotted 1.5px;
+      }
+    }
+  }
+}
+
+//通知
+#notice {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+//通知部分との兼ね合いで調整
+.container {
+  padding: 15px;
+}
+
+.card {
+  background-color: transparent;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+//一覧のページャー
+ul.pagination {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  a.page-link {
+    border-color: #FFE6B4;
+    border-bottom-style: solid 2px;
+    background-color: transparent;
+  }
+  a.page-link:hover {
+    color: black;
+    background-color: rgba(55, 55, 55, 0.1);
+  }
+  li.page-item.disabled {
+    a.page-link {
+      color: black;
+      border-color: #FFE6B4;
+      border-bottom-style: solid 2px;
+      background-color: transparent;
+    }
+  }
+  li.page-item.disabled:hover {
+    a.page-link {
+      background-color: rgba(55, 55, 55, 0.1);
+    }
+  }
+  li.page-item.active a {
+    color: black;
+    font-weight: bold;
+    border-color: #FFE6B4;
+    border-bottom-style: solid 2px;
+    background-color: transparent;
+  }
+  li.page-item.active a:hover {
+    background-color: rgba(55, 55, 55, 0.1);
+  }
+  a {
+    color: black;
+  }
+}
+
+//パーシャルの終了期限入力欄
+select#task_deadline_1i,
+select#task_deadline_2i,
+select#task_deadline_3i,
+select#task_deadline_4i,
+select#task_deadline_5i {
+  padding: 2px;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
+//詳細のバッジ
+span.badge.badge-primary {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #4B4B4B;
+  text-decoration: none;
+  a {
+    color: #4B4B4B;
+    text-decoration: none;
+  }
+}
+
+span.badge.badge-primary:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+//詳細のリンク２つ
+.link_to_btn {
+  text-align: center;
+  margin-bottom: 16px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.footer {
+  text-align: center;
+  padding-top: 60px;
+}

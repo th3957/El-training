@@ -1,0 +1,46 @@
+<div class="row" id="notice">
+  <div class="text-danger col-md-12"><%= alert %></div>
+  <div class="text-success col-md-12"><%= notice %></div>
+</div>
+<div class="row">
+  <h1 class="col-md-12"><%= I18n.t('view.LOGIN') %></h1>
+</div>
+
+<br>
+
+<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label I18n.t('view.email') %>
+      <br>
+      <%= f.text_field :email, :class => "form-control" %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label I18n.t('view.password') %>
+      <br>
+      <%= f.password_field :password, :class => "form-control" %>
+    <hr>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.submit I18n.t('view.LOGIN'), :class => "form-control" %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    <p>If you do not have an account, create it <%= link_to 'here', new_user_path %>.</p>
+  </div>
+</div>
