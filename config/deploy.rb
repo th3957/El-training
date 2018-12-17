@@ -1,7 +1,7 @@
 lock '3.6.0'
 set :application, 'El-training'
 set :repo_url, 'https://github.com/th3957/El-training.git'
-set :branch, ENV['BRANCH'] || 'feature2'
+set :branch, ENV['BRANCH'] || 'master'
 set :deploy_to, '/var/www/El-training'
 set :linked_files, %w{.env config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
