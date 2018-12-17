@@ -11,23 +11,15 @@
       sort
       </button>
       <div class="sort dropdown-menu">
-        <div class="dropdown-item" href="#">
-          <%= link_to I18n.t('view.sort_by_status'), tasks_path(sort_status: "true") %>
-        </div>
-        <div class="dropdown-item" href="#">
-          <%= link_to I18n.t('view.sort_by_priority'), tasks_path(sort_priority: "true") %>
-        </div>
-        <div class="dropdown-item" href="#">
-          <%= link_to I18n.t('view.sort_by_deadline'), tasks_path(sort_expired: "true") %>
-        </div>
-        <div class="dropdown-item" href="#">
-          <%= link_to I18n.t('view.sort_by_create_at'), tasks_path %>
-        </div>
+        <% Task.sorts.each do |k, v| %>
+          <div class="dropdown-item" href="#">
+            <%= link_to I18n.t("view.#{k}"), tasks_path(sort: v) %>
+          </div>
+        <% end %>
       </div>
     </div>
   </h1>
 </div>
-
 
 <%= form_with(model: Task.new, method: :get, url: tasks_path, local: true) do |f| %>
   <div class="row">

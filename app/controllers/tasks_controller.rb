@@ -3,30 +3,18 @@ class TasksController < ApplicationController
   before_action :user_confirmation
 
   def index
-    if params[:sort_status].present?
-      @tasks = Task.with_no_progress
-    elsif params[:sort_priority].present?
-      @tasks = Task.with_highest_priority
-    elsif params[:sort_expired].present?
-      @tasks = Task.closest_to_deadline
-    elsif params[:task].nil?
-      @tasks = Task.of_newest
-    elsif params[:task][:search].present? && params[:task][:status].present? && params[:task][:priority].present?
-      @tasks = Task.search_by_title_and_status_and_priority(
-        params[:task][:title], params[:task][:status], params[:task][:priority]
-        )
-    elsif params[:task][:status].present?
-      @tasks = Task.search_by_title_and_status(
-        params[:task][:title], params[:task][:status]
-        )
-    elsif params[:task][:priority].present?
-      @tasks = Task.search_by_title_and_priority(
-        params[:task][:title], params[:task][:priority]
-        )
+    if params[:task].present? && params[:task][:search].present?
+      @tasks = Task.search(
+        params[:task][:title],
+        params[:task][:status],
+        params[:task][:priority]
+      )
+    elsif params[:sort].present?
+      @tasks = Task.sort(params[:sort])
     else
-      @tasks = Task.search_by_title(params[:task][:title])
+      params[:sort] = "0"
+      @tasks = Task.sort(params[:sort])
     end
-
     @tasks = @tasks.where(user_id: current_user.id).page(params[:page]).per(10)
   end
 
