@@ -3,18 +3,17 @@ class TasksController < ApplicationController
   before_action :user_confirmation
 
   def index
-    if params[:task].present? && params[:task][:search].present?
-      @tasks = Task.search(
-        params[:task][:title],
-        params[:task][:status],
-        params[:task][:priority]
-      )
-    elsif params[:sort].present?
-      @tasks = Task.sort(params[:sort])
-    else
-      params[:sort] = "0"
-      @tasks = Task.sort(params[:sort])
-    end
+    @tasks = if params[:task].present? && params[:task][:search].present?
+               Task.search(
+                 params[:task][:title],
+                 params[:task][:status],
+                 params[:task][:priority]
+               )
+             elsif params[:sort].present?
+               Task.sort(params[:sort])
+             else
+               Task.order(created_at: :desc)
+             end
     @tasks = @tasks.where(user_id: current_user.id).page(params[:page]).per(10)
   end
 

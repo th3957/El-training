@@ -1,12 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
 
-  enum sort: {
-    sort_by_create_at: 0,
-    sort_by_status: 1,
-    sort_by_priority: 2,
-    sort_by_deadline: 3
-  }
+  enum sort: { sort_by_status: 0, sort_by_priority: 1, sort_by_deadline: 2 }
   enum status: { before_start: 0, started: 1, finished: 2 }
   enum priority: { priority_low: 0, priority_middle: 1, priority_high: 2 }
 
@@ -24,11 +19,10 @@ class Task < ApplicationRecord
   end
 
   class << self
-    def sort(query)
-      rel = order(created_at: :desc) if query == "0"
-      rel = order(status: :asc) if query == "1"
-      rel = order(priority: :desc) if query == "2"
-      rel = order(deadline: :asc) if query == "3"
+    def sort(query = nil)
+      rel = order(status: :asc) if query == "0"
+      rel = order(priority: :desc) if query == "1"
+      rel = order(deadline: :asc) if query == "2"
       rel
     end
 
