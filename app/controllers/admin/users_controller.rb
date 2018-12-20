@@ -37,7 +37,9 @@ class Admin::UsersController < ApplicationController
 
   def change_role
     @user.role = role_value
-    if @user.save(validate: false)
+    if role_value == "role_common" && User.where(role: 'role_admin').count == 1
+      redirect_to admin_users_path, alert: 'At least one administrator is required.'
+    elsif @user.save(validate: false)
       redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
       redirect_to admin_users_path, alert: 'Failed to change role.'
