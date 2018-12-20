@@ -1,4 +1,5 @@
 <div class="row" id="notice">
+  <div class="text-danger col-md-12"><%= alert %></div>
   <div class="text-success col-md-12"><%= notice %></div>
 </div>
 <div class="row">
@@ -22,6 +23,7 @@
           <th><%= I18n.t('view.email') %></th>
           <th><%= I18n.t('view.number_of_tasks') %></th>
           <th><%= I18n.t('view.created_at') %></th>
+          <th><%= I18n.t('view.role') %></th>
           <th><%= I18n.t('view.USEREDIT') %></th>
           <th><%= I18n.t('view.USERDELETE') %></th>
         </tr>
@@ -31,6 +33,14 @@
           <td><%= u.email %></td>
           <td><%= u.tasks.count %></td>
           <td><%= I18n.l(u.created_at, format: :custom_long) %></td>
+          <td>
+            <%= link_to I18n.t('view.role_common'),
+                change_role_admin_user_path(u, change_role: "role_admin"),
+                method: :patch if u.role == "role_common" %>
+            <%= link_to I18n.t('view.role_admin'),
+                change_role_admin_user_path(u, change_role: "role_common"),
+                method: :patch if u.role == "role_admin" %>
+          </td>
           <td class="user_edit"><%= link_to I18n.t('view.EDIT'), edit_admin_user_path(u) %></td>
           <td class="user_delete"><%= link_to I18n.t('view.DELETE'), admin_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
