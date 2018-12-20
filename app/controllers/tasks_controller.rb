@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
+  before_action :login_request
   before_action :set_task, only: [:edit, :show, :update, :destroy]
-  before_action :user_confirmation
 
   def index
     @tasks = if params[:task].present? && params[:task][:search].present?
@@ -57,10 +57,6 @@ class TasksController < ApplicationController
     else
       @task = Task.find(params[:id])
     end
-  end
-
-  def user_confirmation
-    redirect_to root_path unless logged_in?
   end
 
   def task_params
