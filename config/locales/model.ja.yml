@@ -15,7 +15,12 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワードの確認
+        role: 権限
   enums:
+    user:
+      role:
+        role_common: 一般
+        role_admin: 管理者
     task:
       status:
         before_start: 未着手

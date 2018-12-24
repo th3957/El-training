@@ -260,6 +260,9 @@ ja:
     email: メールアドレス
     password: パスワード
     password_confirmation: パスワードの確認
+    role: ユーザー権限
+    role_common: 一般
+    role_admin: 管理者
     status: 進捗状況
     before_start: 未着手
     started: 着手中

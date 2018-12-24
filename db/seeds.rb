@@ -1,11 +1,23 @@
 1.times do |n|
-  name = "テスター"
+  name = "管理ユーザー"
   email = "1@gmail.com"
   password = "111111"
   User.create!(name: name,
                email: email,
                password: password,
                password_confirmation: password,
+               role: 1
+               )
+end
+
+1.times do |n|
+  name = "一般ユーザー"
+  email = "2@gmail.com"
+  password = "222222"
+  User.create!(name: name,
+               email: email,
+               password: password,
+               password_confirmation: password
                )
 end
 
@@ -16,7 +28,7 @@ end
   User.create!(name: name,
                email: email,
                password: password,
-               password_confirmation: password,
+               password_confirmation: password
                )
 end
 

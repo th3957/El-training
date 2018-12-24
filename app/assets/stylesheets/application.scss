@@ -2,7 +2,7 @@
 
 //背景
 .jumbotron {
-  background: url(background.png);
+  background-image: image-url("background.png");
   background-size: cover;
   background-position: center 60%;
   padding-top: 0;
@@ -72,7 +72,8 @@ input#task_title,
 }
 
 //通知
-#notice {
+#notice,
+#alert {
   font-weight: bold;
   margin-bottom: 15px;
 }

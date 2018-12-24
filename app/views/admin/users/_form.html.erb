@@ -54,6 +54,19 @@
     </div>
   </div>
 
+  <br>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <%= f.label I18n.t('view.role') %>
+      <br>
+      <%= f.radio_button(:role, :role_common, checked: "checked") %>
+      <%= f.label(:role, I18n.t('view.role_common')) %>
+      <%= f.radio_button(:role, :role_admin) %>
+      <%= f.label(:role, I18n.t('view.role_admin')) %>
+    </div>
+  </div>
+
   <hr>
 
   <div class="row">

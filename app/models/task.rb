@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
 
+  enum sort: { sort_by_status: 0, sort_by_priority: 1, sort_by_deadline: 2 }
   enum status: { before_start: 0, started: 1, finished: 2 }
   enum priority: { priority_low: 0, priority_middle: 1, priority_high: 2 }
 
@@ -17,20 +18,25 @@ class Task < ApplicationRecord
     end
   end
 
-  scope :with_no_progress, -> { order(status: :asc) }
-  scope :with_highest_priority, -> { order(priority: :desc) }
-  scope :closest_to_deadline, -> { order(deadline: :asc) }
-  scope :of_newest, -> { order(created_at: :desc) }
-  scope :search_by_title, -> (t) {
-    where("title LIKE ?", "%#{t}%")
-  }
-  scope :search_by_title_and_status, -> (t, s) {
-    where("title LIKE ?", "%#{t}%").where(status: s)
-  }
-  scope :search_by_title_and_priority, -> (t, p) {
-    where("title LIKE ?", "%#{t}%").where(priority: p)
-  }
-  scope :search_by_title_and_status_and_priority, -> (t, s, p) {
-    where("title LIKE ?", "%#{t}%").where(status: s).where(priority: p)
-  }
+  class << self
+    def sort(query = nil)
+      rel = order(status: :asc) if query == "0"
+      rel = order(priority: :desc) if query == "1"
+      rel = order(deadline: :asc) if query == "2"
+      rel
+    end
+
+    def search(t, s, p)
+      if s.present? && p.present?
+        rel = where("title LIKE ?", "%#{t}%").where(status: s).where(priority: p)
+      elsif s.present?
+        rel = where("title LIKE ?", "%#{t}%").where(status: s)
+      elsif p.present?
+        rel = where("title LIKE ?", "%#{t}%").where(priority: p)
+      else
+        rel = where("title LIKE ?", "%#{t}%")
+      end
+      rel
+    end
+  end
 end

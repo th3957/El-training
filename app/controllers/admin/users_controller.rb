@@ -1,9 +1,10 @@
 class Admin::UsersController < ApplicationController
-  before_action :user_confirmation
-  before_action :set_user, only: [:edit, :show, :update, :destroy]
+  before_action :login_request
+  before_action :authorization_check
+  before_action :set_user, only: [:edit, :show, :update, :change_role, :destroy]
 
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.all.order(role: :desc).page(params[:page]).per(10)
   end
 
   def create
@@ -34,6 +35,17 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def change_role
+    @user.role = role_value
+    if role_value == "role_common" && User.where(role: 'role_admin').count == 1
+      redirect_to admin_users_path, alert: 'At least one administrator is required.'
+    elsif @user.save(validate: false)
+      redirect_to admin_users_path, notice: 'User was successfully updated.'
+    else
+      redirect_to admin_users_path, alert: 'Failed to change role.'
+    end
+  end
+
   def destroy
     @user.destroy
     redirect_to ({:controller => 'admin/users', :action => 'index'}), :notice => 'User was successfully deleted.'
@@ -45,15 +57,16 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def user_confirmation
-    redirect_to root_path unless logged_in?
-  end
-
   def user_params
     params.require(:user).permit(:name,
                                  :email,
                                  :password,
-                                 :password_confirmation
+                                 :password_confirmation,
+                                 :role
                                  )
+  end
+
+  def role_value
+    params.permit(:change_role)[:change_role]
   end
 end
