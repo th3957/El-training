@@ -11,6 +11,8 @@ class TasksController < ApplicationController
                )
              elsif params[:sort].present?
                Task.sort(params[:sort])
+             elsif params[:label_search].present?
+               Task.label_search(params[:label_search])
              else
                Task.order(created_at: :desc)
              end
