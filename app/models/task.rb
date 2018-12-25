@@ -40,5 +40,13 @@ class Task < ApplicationRecord
       end
       rel
     end
+
+    def label_search(query)
+      rel = where(id: Labeling.where(label_id: 1).pluck(:task_id)) if query == "0"
+      rel = where(id: Labeling.where(label_id: 2).pluck(:task_id)) if query == "1"
+      rel = where(id: Labeling.where(label_id: 3).pluck(:task_id)) if query == "2"
+      rel = where(id: Labeling.where(label_id: 4).pluck(:task_id)) if query == "3"
+      rel
+    end
   end
 end
