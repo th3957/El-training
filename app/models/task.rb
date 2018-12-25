@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labeling_labels, through: :labelings, source: :label
 
   enum sort: { sort_by_status: 0, sort_by_priority: 1, sort_by_deadline: 2 }
   enum status: { before_start: 0, started: 1, finished: 2 }
