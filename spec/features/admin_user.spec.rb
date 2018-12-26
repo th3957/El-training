@@ -6,11 +6,11 @@ RSpec.feature "管理ユーザー機能", type: :feature do
     FactoryBot.create(:second_user)
   end
 
-  feature "テストユーザー１でログイン", type: :feature do
+  feature "テストユーザー２でログイン", type: :feature do
     background do
       visit root_path
-      fill_in 'session_email', with: '111@gmail.com'
-      fill_in 'session_password', with: 'qazwsx'
+      fill_in 'session_email', with: '222@gmail.com'
+      fill_in 'session_password', with: 'edc293'
       click_button 'ログイン'
       visit admin_users_path
     end
@@ -52,13 +52,6 @@ RSpec.feature "管理ユーザー機能", type: :feature do
       expect(page).to have_content '名前を編集します。'
       expect(page).not_to have_content 'テストユーザー１のネーム'
       expect(page).to have_content 'ユーザー一覧'
-    end
-
-    scenario "ユーザー削除のテスト" do
-      all('.user_delete')[1].click_link '削除'
-      expect(page).to have_content '一覧'
-      expect(page).to have_content 'テストユーザー１のネーム'
-      expect(page).not_to have_content 'テストユーザー２のネーム'
     end
   end
 end

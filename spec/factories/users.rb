@@ -11,6 +11,7 @@ FactoryBot.define do
     email { '222@gmail.com' }
     password { 'edc293' }
     password_confirmation { 'edc293' }
+    role { 'role_admin' }
     initialize_with { User.find_or_create_by(email: email)}
   end
 end
