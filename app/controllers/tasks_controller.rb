@@ -21,7 +21,15 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.build(task_params)
-    if @task.save
+    if @task.valid?
+      ActiveRecord::Base.transaction do
+        @task.save!
+        if labeling_params[:label_ids] != nil
+          labeling_params[:label_ids].each do |p|
+            Labeling.create!(label_id: p.to_i, task_id: @task.id)
+          end
+        end
+      end
       redirect_to task_path(@task), notice: 'Task was successfully created.'
     else
       render :new
@@ -68,5 +76,9 @@ class TasksController < ApplicationController
                                  :deadline,
                                  :contents
                                  )
+  end
+
+  def labeling_params
+    params.require(:task).permit(label_ids: [])
   end
 end
