@@ -7,10 +7,9 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
 
 ## アプリケーションの概要
 
-&nbsp; &nbsp; &nbsp;現時点でタスク登録機能、ソート機能、進捗ステータス表示機能を実装しています。  
-&nbsp; &nbsp; &nbsp;今後、優先順位表示機能、ラベリング機能、ユーザー登録機能、ユーザー管理機能を追加していきます。  
-&nbsp; &nbsp; &nbsp;さらに、追加機能に対してソートおよび検索機能を実装していきます。
-
+&nbsp; &nbsp; &nbsp;タスク管理システムのアプリケーションです。  
+&nbsp; &nbsp; &nbsp;タスク管理機能、タスクラベル添付機能、ユーザー管理機能を実装しています。  
+&nbsp; &nbsp; &nbsp;また、作成されたタスクのソート・検索機能等が使用可能です。  
 
 ## 開発環境
 - Windows 10
@@ -62,11 +61,12 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
     bundle install --path vendor/bundler
 ```
 
-4. データベースの作成とマイグレーションをおこないます。
+4. データベースの作成とマイグレーション、シードデータの作成をおこないます。
 
 ```ruby
     bundle exec rails db:create
     bundle exec rails db:migrate
+    bundle exec rails db:seed
 ```
 
 5. サーバーを起動します。
@@ -75,24 +75,27 @@ Ruby on Railsとその周辺技術の基礎を習得するための新入社員�
     bundle exec rails s
 ```
 
-6. ブラウザで以下のURLを開くと、アプリケーションのページへアクセスできます。
+6. ブラウザで以下のURLを開くと、アプリケーションのページへアクセスできます。  
+管理ユーザーは Eメール：1@gmail.com パスワード：111111 、  
+一般ユーザーは Eメール：2@gmail.com パスワード：222222 でログインしてください。
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<http://localhost:3000/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<http://localhost:3000/>
 
 ## テーブル設計
 | モデル名 | カラム名 | &nbsp; データ型 &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| モデル名 | &nbsp; &nbsp; &nbsp; カラム名 &nbsp; &nbsp; &nbsp; | &nbsp; データ型 &nbsp; |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|User|name|string||Labeling|task_id|integer|
-|┣|email|string||┣|label_id|integer|
+|User|name|string||Labeling|task_id|bigint|
+|┣|email|string||┣|label_id|bigint|
 |┣|email|index||┣|created_at|datetime|
-|┣|password_digest|string||┣|updated_at|datetime|
-|┣|role|integer||┣|task_id(FK)|index|
-|┣|created_at|datetime||┗|label_id(FK)|index|
-|┗|updated_at|datetime||Label|title|string|
-|Task|title|string||┣|Labelcolor|integer|
-|┣|title|index||┣|created_at|datetime|
-|┣|contents|text||┣|updated_at|datetime|
-|┣|deadline|datetime||┗|user_id|integer|
+|┣|password_digest|string||┗|updated_at|datetime|
+|┣|role|integer|
+|┣|created_at|datetime||Label|title|string|
+|┗|updated_at|datetime||┣|created_at|datetime|
+|||||┗|updated_at|datetime|
+|Task|title|string|
+|┣|title|index|
+|┣|contents|text|
+|┣|deadline|datetime|
 |┣|status|integer|
 |┣|status|index|
 |┣|priority|integer|

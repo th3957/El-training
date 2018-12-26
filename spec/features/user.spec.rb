@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "ユーザー機能", type: :feature do
   background do
     FactoryBot.create(:user)
+    FactoryBot.create(:second_user)
   end
 
   scenario "ユーザー作成のテスト" do
@@ -60,6 +61,7 @@ RSpec.feature "ユーザー機能", type: :feature do
     end
 
     scenario "ユーザー詳細のテスト" do
+      click_link 'personal page'
       expect(page).to have_content 'テストユーザー１のネーム'
       expect(page).not_to have_content 'テストユーザー２のネーム'
     end

@@ -15,6 +15,10 @@ class User < ApplicationRecord
   validates :role, presence: true, inclusion: { in: User.roles.keys }
 
   def admin_presence?
-    raise if self.role == "role_common" && User.where(role: 'role_admin').count == 1
+    if User.find_by(id: self.id).nil?
+      true
+    elsif self.role == "role_common" && User.find(self.id).role == "role_admin" && User.where(role: 'role_admin').count == 1
+      raise
+    end
   end
 end

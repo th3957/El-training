@@ -14,6 +14,20 @@
 </div>
 
 <%= form_with(model: task, local: true) do |f| %>
+  <% if action_name == 'new' || action_name == 'create' %>
+    <div class="row">
+      <div class="col-xl-12">
+        <% Label.all.each do |l| %>
+          <%=
+            f.check_box :label_ids, { multiple: true, checked: l[:checked], disabled: l[:disabled], include_hidden: false }, l[:id]
+          %>
+          <%= f.label l.title %>
+        <% end %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+
   <div class="row">
     <div class="col-xl-12">
       <%= f.label I18n.t('view.title') %>

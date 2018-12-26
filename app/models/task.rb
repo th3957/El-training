@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labeling_labels, through: :labelings, source: :label
 
   enum sort: { sort_by_status: 0, sort_by_priority: 1, sort_by_deadline: 2 }
   enum status: { before_start: 0, started: 1, finished: 2 }
@@ -36,6 +38,14 @@ class Task < ApplicationRecord
       else
         rel = where("title LIKE ?", "%#{t}%")
       end
+      rel
+    end
+
+    def label_search(query)
+      rel = where(id: Labeling.where(label_id: 1).pluck(:task_id)) if query == "0"
+      rel = where(id: Labeling.where(label_id: 2).pluck(:task_id)) if query == "1"
+      rel = where(id: Labeling.where(label_id: 3).pluck(:task_id)) if query == "2"
+      rel = where(id: Labeling.where(label_id: 4).pluck(:task_id)) if query == "3"
       rel
     end
   end
