@@ -8,13 +8,26 @@
     <%= I18n.t('view.INDEX') %>
 
     <div class="btn-group">
-      <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"     aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       sort
       </button>
       <div class="sort dropdown-menu">
         <% Task.sorts.each do |k, v| %>
           <div class="dropdown-item" href="#">
             <%= link_to I18n.t("view.#{k}"), tasks_path(sort: v) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      label search
+      </button>
+      <div class="sort dropdown-menu">
+        <% Label.label_searches.each do |k, v| %>
+          <div class="dropdown-item" href="#">
+            <%= link_to k, tasks_path(label_search: v) %>
           </div>
         <% end %>
       </div>
